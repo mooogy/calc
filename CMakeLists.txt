@@ -48,7 +48,13 @@ enable_testing()
 
 add_executable(
     tests
-    test/test.cpp
+    test/main_test.cpp
+    test/ast_test.cpp
+)
+
+target_include_directories(
+    tests PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 target_link_libraries(
