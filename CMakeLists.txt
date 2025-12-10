@@ -5,6 +5,18 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+
+
+# QT
+
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets)
+
+# Main App
+
 add_executable(
     main
     src/main.cpp
@@ -15,8 +27,13 @@ target_include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
+target_link_libraries(
+    main PRIVATE
+    Qt6::Core
+    Qt6::Widgets
+)
 
-
+# Googletest
 
 include(FetchContent)
 FetchContent_Declare(
@@ -30,14 +47,17 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(
-    hello_test
+    tests
     test/test.cpp
 )
 
 target_link_libraries(
-    hello_test
+    tests
     GTest::gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(hello_test)
+gtest_discover_tests(tests)
+
+
+

@@ -1,17 +1,12 @@
-#include <iostream>
-#include <parser.h>
-#include <memory>
+#include <QApplication>
+#include <QPushButton>
 
-int main() {
-    {
-        std::unique_ptr<Parser> parser = std::make_unique<CsvParser>();
-        parser->parse();
-    }
-
-    {
-        std::unique_ptr<Parser> parser = std::make_unique<JsonParser>();
-        parser->parse();
-    }
-
-    return 0;
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
+    
+    QPushButton button("Hello Qt!");
+    button.resize(200, 100);
+    button.show();
+    
+    return app.exec();
 }
